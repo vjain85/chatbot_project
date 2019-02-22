@@ -15,8 +15,8 @@ cursor = connection.cursor()
 # create the tables needed by the program
 
 create_table_request_list = [
-    "CREATE TABLE words(words TEXT UNIQUE)",
-    "CREATE TABLE sentences(ques TEXT UNIQUE,ans TEXT)"
+    'CREATE TABLE words(word TEXT UNIQUE)',
+    'CREATE TABLE sentences(Question TEXT UNIQUE,Answer TEXT)'
 ]
 
 for create_table_request in create_table_request_list:
@@ -33,13 +33,15 @@ def speak(audioString):
 
 
 def find_text(string_found):
-    rows = cursor.execute("SELECT ans FROM sentences WHERE ques= '"+string_found[1:]+"'")
+    rows = cursor.execute("SELECT Answer FROM sentences WHERE Question= '"+string_found[1:]+"'")
     for row in rows:
+        #print(row[0])
         if(row[0]):
             speak(row[0])
             return
-    rows1 = cursor.execute("SELECT ans FROM sentences WHERE ques= '"+string_found[1:]+"'")
+    rows1 = cursor.execute("SELECT Answer FROM sentences WHERE Question like '%"+string_found[1:]+"%'")
     for row in rows1:
+        #print(row[0])
         if(row[0]):
             speak(row[0])
             return
