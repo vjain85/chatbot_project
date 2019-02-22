@@ -7,6 +7,7 @@ import webbrowser as wb
 import speech_recognition as sr
 import audio_find as find
 import training as tr
+import string
 check = 0
 
 
@@ -25,7 +26,7 @@ def recordAudio():
         r.dynamic_energy_ratio = 0.1
         r.phrase_threshold = 0.1
         r.adjust_for_ambient_noise(source,duration=1)
-        speak("say something!")
+        print("listening....")
         audio = r.listen(source,phrase_time_limit = 3)
     data = ""
     try:
@@ -93,10 +94,14 @@ def search_data(data):
         elif "close" in data or "kill" in data:
             if "Counter Strike" in data:
                 os.system("TASKKILL /F /IM czero.exe")
+                speak("Counter Strike closed!")
         elif "play" in data:
             if "music" in data:
                 speak("opening groove music")
                 os.system("start mswindowsmusic:")
+        elif "check news" in data:
+            speak("fetching latest news for you!")
+            wb.open("https://m.dailyhunt.in/news/india/english/")
         elif "train yourself" in data or "start training" in data:
             tr.training_start()
         else:
@@ -106,6 +111,6 @@ def search_data(data):
 speak("Welcome back")
 
 while 1:
-    #data = input()
-    data = recordAudio()
+    data = input()
+    #data = recordAudio()
     search_data(data)
