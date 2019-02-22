@@ -12,7 +12,7 @@ from win32com.client import constants
 
 create_table_request_list = [
     "CREATE TABLE words(word TEXT UNIQUE)",
-    "CREATE TABLE sentence(question TEXT UNIQUE,answer TEXT)"
+    "CREATE TABLE sentences(Question TEXT UNIQUE,Answer TEXT)"
 ]
 
 
@@ -34,7 +34,7 @@ def training_start():
 
     speak("wait while training")
     filenew = "update.txt"
-    f = open(filenew,"r+")
+    f = open(filenew, "r+")
     ques = []
     ans = []
     que_status = 1
@@ -52,7 +52,7 @@ def training_start():
                 que_status = 0
                 print("Q: "+ques)
                 print("A: "+ans)
-                cursor.execute("INSERT or REPLACE INTO sentence VALUES(?,?)",(ques,ans))
+                cursor.execute("INSERT or REPLACE INTO sentences VALUES(?,?)",(ques,ans))
             else:
                 que_status = 0
     f.close()
