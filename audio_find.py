@@ -6,6 +6,7 @@ from string import punctuation
 from collections import Counter
 from win32com.client import constants
 import win32com.client
+import webbrowser as wb
 
 # initialize the connecion to the database
 
@@ -45,6 +46,7 @@ def find_text(string_found):
         if(row[0]):
             speak(row[0])
             return
-    speak("Sorry! Can't assist you on this right now")
+    wb.open("http://www.google.com/search?client=firefox-b-d&q="+string_found)
+    speak("Here's what I found on google")
     return
 
