@@ -196,7 +196,7 @@ speak("Welcome back")
 
 while 1:
     if input_mode == 1:
-        data = input()
+        data = recordAudio()
     else:
         data = input()
     search_data(data)
