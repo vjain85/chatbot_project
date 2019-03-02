@@ -15,7 +15,7 @@ input_mode = 1
 
 # input_mode = 0 for offline mode
 # input_mode = 1 for speech to text
-# input_mode = 2 for text mode in online mode
+# input_mode = 2 for text input in online mode
 
 
 def speak(audiostring):
@@ -46,11 +46,11 @@ def recordAudio():
         speak("Sorry, couldn't understand you!")
         check = check + 1
         if check == 2:
-            speak("Switch to offline mode instead?")
+            speak("Switch to text mode instead?")
             speak("This require input in textual form!")
             speak("Say yes if ok or say anything else otherwise!")
             response = recordAudio()
-            if response == 'Yes' or response == 'yes':
+            if 'Yes' in response or 'yes' in response:
                 input_mode = 2
         if check == 3:
             speak("Good Bye!")
@@ -64,6 +64,7 @@ def recordAudio():
         if response == 'Y' or response == 'y':
             input_mode = 0
         else:
+            speak("Good Bye!")
             exit()
 
     return data
@@ -94,7 +95,7 @@ def search_data(data):
         elif "your name" in data:
             speak("My name is Dexter 1.0")
         elif "joke" in data or "Joke" in data:
-            speak("One of the interesting jokes I remember is ")
+            speak("Yup! One of the interesting jokes I remember is ")
             joke.telljoke()
         elif "fact" in data or "Fact" in data:
             speak("One of the interesting facts I remember is ")
@@ -113,16 +114,16 @@ def search_data(data):
             wb.open("http://www.google.com/search?client=firefox-b-d&q=" + data)
         # open commands...
 
-        elif "open YouTube" in data:
+        elif "open" in data and "YouTube" in data:
             if input_mode:
                 speak("opening YouTube")
-                wb.open("https://www.youtube.com")
+                wb.open("https://www.youtube.com",autoraise=True)
             else:
                 speak("Sorry! This can not be executed in offline mode")
         elif "open Facebook" in data:
             if input_mode:
                 speak("opening facebook")
-                wb.open("https://www.facebook.com")
+                wb.open("https://www.facebook.com",autoraise=True)
             else:
                 speak("Sorry! This can not be executed in offline mode")
         elif "open WhatsApp" in data:
@@ -148,17 +149,17 @@ def search_data(data):
             else:
                 speak("Sorry! This can not be executed in offline mode")
         elif "your significance" in data:
-            speak("ghar say mai nikla tanha akela, saath me mere kaun hai, BOT hai mera")
+            speak("ghar say mai nikla. tanha akela? saath me mere kaun hai. BOT hai mera?")
         elif "Google" in data:
             if input_mode == 1:
                 speak(" what to search")
                 term = recordAudio()
-                wb.open("http://www.google.com/search?client=firefox-b-d&q="+term)
+                wb.open("http://www.google.com/search?client=firefox-b-d&q="+term,autoraise=True)
                 speak("Here is what I found on Google")
             elif input_mode == 2:
                 speak("what to search")
                 term = input()
-                wb.open("http://www.google.com/search?client=firefox-b-d&q=" + term)
+                wb.open("http://www.google.com/search?client=firefox-b-d&q=" + term,autoraise=True)
                 speak("Here is what I found on Google")
             else:
                 speak("Sorry! This can not be executed in offline mode")
@@ -169,6 +170,7 @@ def search_data(data):
             problem = data[10:]
             result = str(eval(problem))
             speak(result)
+
         elif "let's play" in data or "open" in data:
             if "Counter Strike" in data:
                 os.startfile("C:\Program Files (x86)\Condition Zero - Xtreme Edition\czero.exe")
