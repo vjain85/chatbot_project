@@ -119,19 +119,19 @@ def search_data(data):
                 speak("opening YouTube")
                 wb.open("https://www.youtube.com",autoraise=True)
             else:
-                speak("Sorry! This can not be executed in offline mode")
+                speak("Sorry! This can not be done in offline mode")
         elif "open Facebook" in data:
             if input_mode:
                 speak("opening facebook")
                 wb.open("https://www.facebook.com",autoraise=True)
             else:
-                speak("Sorry! This can not be executed in offline mode")
+                speak("Sorry! This can not be done in offline mode")
         elif "open WhatsApp" in data:
             if input_mode:
                 speak("opening whatsapp")
                 wb.open("https://web.whatsapp.com/", new=0, autoraise=True)
             else:
-                speak("Sorry! This can not be executed in offline mode")
+                speak("Sorry! This can not be done in offline mode")
         elif "mail" in data:
             speak("opening mail")
             os.system("start outlookmail:")
@@ -147,7 +147,7 @@ def search_data(data):
                 speak("opening youtube")
                 wb.open("https://www.youtube.com/results?search_query=" + query, new=0, autoraise=True)
             else:
-                speak("Sorry! This can not be executed in offline mode")
+                speak("Sorry! This can not be done in offline mode")
         elif "your significance" in data:
             speak("ghar say mai nikla. tanha akela? saath me mere kaun hai. BOT hai mera?")
         elif "Google" in data:
@@ -162,7 +162,7 @@ def search_data(data):
                 wb.open("http://www.google.com/search?client=firefox-b-d&q=" + term,autoraise=True)
                 speak("Here is what I found on Google")
             else:
-                speak("Sorry! This can not be executed in offline mode")
+                speak("Sorry! This can not be done in offline mode")
 
         # calculate commands...
 
@@ -186,8 +186,11 @@ def search_data(data):
                 speak("opening groove music")
                 os.system("start mswindowsmusic:")
         elif "check news" in data:
-            speak("fetching latest news for you!")
-            wb.open("https://m.dailyhunt.in/news/india/english/")
+            if input_mode == 1 or input_mode == 2:
+                speak("fetching latest news for you!")
+                wb.open("https://m.dailyhunt.in/news/india/english/")
+            else:
+                speak("Sorry! This can not be done in offline mode")
         elif "train yourself" in data or "start training" in data:
             tr.training_start()
         else:
